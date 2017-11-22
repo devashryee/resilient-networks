@@ -6,7 +6,5 @@
 ---
 ## Background
 ###### Today's networks lack the ability to respond gracefully to failure. The loss of network service impacts people deeply because of how reliant they are on technology. In this experiment, we tried designing network recovery paths for internet service providers using sharing links in the event of a network outage.
-
 ###### Network resiliency is defined as a network's ability to restore and recover services after facing issues, ranging from hackers, to natural disasters, to hardware malfunctions. Since network outages occur often, networks need improvements.
-
 ###### General ways of improving network resiliency include [adding redundant paths between nodes so that these nodes are still able to communicate even when main paths are down](https://calhoun.nps.edu/bitstream/handle/10945/37231/Sterbenz-Cetinkaya-Hameed-Jabbar-Qian-Rohrer-2011.pdf), and [improving network security so that hackers have a harder time accessing valuable data](https://calhoun.nps.edu/bitstream/handle/10945/37231/Sterbenz-Cetinkaya-Hameed-Jabbar-Qian-Rohrer-2011.pdf).
