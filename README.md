@@ -14,3 +14,5 @@
 ###### Another way to potentially increase network resiliency is by sharing links. There are many redundant links between ISP routers that belong to different ISPs. If one ISP is experiencing a failure due to a network outage, the other ISP might be willing to carry the ISP’s network traffic on its own links temporarily. Overall, this agreement provides a safety net to all ISPs in case of an outage bringing down any one ISPs’ links.
 ![](https://witestlab.poly.edu/blog/content/images/2016/02/dd-topology.svg)
 ###### To test the effects of sharing on two ISPs, we set up the network topology shown above. (Green represents ISP 1, purple represents ISP 2, lines represent links, and circles represent customers.) This topology consists of three nodes representing ISP routers, each connected to a neighbouring router by two separate links, belonging to two different ISPs. Each ISP router is then connected to two other nodes which represents a customer of each ISP. To create one, two, three, or four outages, we brought down the specific links shown above.
+---
+## Results
