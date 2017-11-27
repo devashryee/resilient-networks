@@ -88,7 +88,7 @@ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets
 13  * * *  
 14  p3-link-4 (10.1.13.3)  2997.938 ms !H  2997.913 ms !H  2997.850 ms !H  
 ```
-###### while b1 & b2 don't connect at all
+###### while b1 & b2 don't connect at all!
 ```bash
 traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
  1  p1-link-2 (10.2.1.1)  0.716 ms  0.760 ms  0.704 ms
@@ -109,3 +109,19 @@ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets
 16  * * *  
 17  *^C  
 ```
+---
+### One outage, with sharing
+###### When there is sharing and one outage, we see that both a1 and a2 are able to connect with direct routes, and b1 and b2 are able to connect using direct sharing routes:
+```bash
+traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.738 ms  0.665 ms  0.600 ms
+ 2  p2-link-0 (10.1.12.2)  1.212 ms  1.170 ms  1.101 ms
+ 3  a2-link-7 (10.1.2.2)  1.576 ms  1.522 ms  1.464 ms
+ ```
+ ```bash
+ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  1.311 ms  1.258 ms  1.212 ms
+ 2  p2-link-0 (10.1.12.2)  1.666 ms  1.620 ms  1.552 ms
+ 3  b2-link-6 (10.2.2.2)  2.950 ms  2.912 ms  2.848 ms
+ ```
+ ###
