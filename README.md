@@ -177,4 +177,4 @@ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets
  ###### First, log on to the [GENI Portal](https://portal.geni.net/), create a slice, click "Add Resources", and load [this RSpec](https://raw.githubusercontent.com/dolly115/resilient-networks-lab/master/RSpec.xml) from URL in the "Choose RSpec" section. This will set up the following topology:
 ![](https://witestlab.poly.edu/blog/content/images/2016/02/dd-jacks.png)
 ###### Bind to any InstaGENI site (click "Site 1" and choose an aggregate from the list) and reserve the resources.
-###### When the resources are ready to login, log into each of p1, p2, and p3 and run the routes-nosharing script:
+###### When the resources are ready to login, log into each of p1, p2, and p3 and run the [routes-nosharing](https://github.com/devashryee/resilient-networks/blob/master/routes-nosharing.sh) script:
