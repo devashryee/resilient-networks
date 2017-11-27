@@ -16,3 +16,96 @@
 ###### To test the effects of sharing on two ISPs, we set up the network topology shown above. (Green represents ISP 1, purple represents ISP 2, lines represent links, and circles represent customers.) This topology consists of three nodes representing ISP routers, each connected to a neighbouring router by two separate links, belonging to two different ISPs. Each ISP router is then connected to two other nodes which represents a customer of each ISP. To create one, two, three, or four outages, we brought down the specific links shown above.
 ---
 ## Results
+#### The results are summarized in the following image:
+![](https://witestlab.poly.edu/blog/content/images/2016/02/dd-results.svg)
+###### Green represents ISP 1 (A1/A2 nodes), purple represents ISP 2 (B1/B2 nodes), solid lines represent links carrying traffic belonging to the ISP who owns the link ("non-sharing"), and dotted lines represent "sharing" links.
+###### Sharing allowed users to communicate with more outages. When there was no sharing among the two ISPs and there were three outages, two of the nodes were completely disconnected. However, when there was sharing between the two ISPs and there were four outages, all nodes were connected through backup sharing routes.
+### No outages
+###### When there are no outages, our traceroute results show that we can take the most direct route from a1 to a2: 
+```bash
+traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.613 ms  0.579 ms  0.587 ms
+ 2  p2-link-0 (10.1.12.2)  0.957 ms  1.008 ms  0.968 ms
+ 3  a2-link-7 (10.1.2.2)  1.488 ms  1.453 ms  1.413 ms
+ ```
+ ###### & similarly from b1 and b2
+ ```bash
+ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  0.755 ms  0.679 ms  0.580 ms
+ 2  p2-link-3 (10.2.12.2)  1.167 ms  1.116 ms  1.055 ms
+ 3  b2-link-6 (10.2.2.2)  2.220 ms  2.179 ms  2.100 ms
+ ```
+ ### One outage, no sharing
+ ###### When the "purple" link between b1 and b1 is brought down (one outage) and there is no sharing, a1 and a1 are still able to connect using direct routes: 
+ ```bash
+ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.577 ms  0.568 ms  0.547 ms
+ 2  p2-link-0 (10.1.12.2)  0.986 ms  0.990 ms  0.963 ms
+ 3  a2-link-7 (10.1.2.2)  1.356 ms  1.313 ms  1.264 ms
+ ```
+ ###### & b1 and b2 are able to connect with more latency using back-up routes.
+ ```bash
+ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  0.641 ms  0.573 ms  0.480 ms
+ 2  p3-link-5 (10.2.13.3)  1.378 ms  1.277 ms  1.102 ms
+ 3  * * *
+ 4  b2-link-6 (10.2.2.2)  2.296 ms  2.203 ms  2.125 ms
+ ```
+ ### Two outages, no sharing
+ ###### Next, we create the two-outage condition by bringing down the "green" link connecting a1 and a2. When there is no sharing and two outages, we see that both a1 and a2 and b1 and b2 are able to connect with more latency using back-up routes.
+ ```bash
+ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.674 ms  0.617 ms  0.556 ms
+ 2  p3-link-4 (10.1.13.3)  1.073 ms  1.024 ms  0.976 ms
+ 3  * * *
+ 4  a2-link-7 (10.1.2.2)  2.412 ms  2.373 ms  2.264 ms
+ ```
+ 
+ ```bash
+ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  0.677 ms  0.606 ms  0.547 ms
+ 2  p3-link-5 (10.2.13.3)  1.083 ms  1.205 ms  1.161 ms
+ 3  * * *
+ 4  b2-link-6 (10.2.2.2)  2.020 ms  1.979 ms  1.952 ms
+ ```
+ 
+ ### Three outages, no sharing
+ ###### When there is no sharing and three outages, we see that both a1 and a2 are able to connect with more latency than before using back-up routes:
+```bash
+traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.673 ms  0.633 ms  0.574 ms
+ 2  p3-link-4 (10.1.13.3)  0.972 ms  1.026 ms  0.989 ms
+ 3  * * *
+ 4  * * *
+ 5  * * *
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  * * *
+10  * * *  
+11  * * *  
+12  * * *  
+13  * * *  
+14  p3-link-4 (10.1.13.3)  2997.938 ms !H  2997.913 ms !H  2997.850 ms !H  
+```
+###### while b1 & b2 don't connect at all
+```bash
+traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  0.716 ms  0.760 ms  0.704 ms
+ 2  p3-link-5 (10.2.13.3)  1.113 ms  1.061 ms  1.039 ms
+ 3  * * *
+ 4  * * *
+ 5  * * *
+ 6  * * *
+ 7  * * *
+ 8  * * *
+ 9  * * *
+10  * * *  
+11  * * *  
+12  * * *  
+13  * * *  
+14  * * *  
+15  * * *  
+16  * * *  
+17  *^C  
+```
