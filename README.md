@@ -124,4 +124,54 @@ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets
  2  p2-link-0 (10.1.12.2)  1.666 ms  1.620 ms  1.552 ms
  3  b2-link-6 (10.2.2.2)  2.950 ms  2.912 ms  2.848 ms
  ```
- ###
+ ### Two outages, with sharing
+ ###### When there is sharing and two outages, both a1 and a2, and b1 and b2, connect using back-up routes that don't involve sharing links - because both of the redundant links have been brought down, they can't help each other by sharing.
+ ```bash
+ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.673 ms  0.605 ms  0.546 ms
+ 2  p3-link-4 (10.1.13.3)  1.366 ms  1.318 ms  1.295 ms
+ 3  * * *
+ 4  a2-link-7 (10.1.2.2)  2.939 ms  2.837 ms  2.806 ms
+ ```
+ ```bash
+ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  0.752 ms  1.062 ms  1.004 ms
+ 2  p3-link-5 (10.2.13.3)  2.193 ms  2.172 ms  2.126 ms
+ 3  * * *
+ 4  b2-link-6 (10.2.2.2)  3.512 ms  3.472 ms  3.420 ms
+ ```
+ ### Three outages, with sharing
+ ###### When there is sharing and three outages, we see that a1 and a2 are able to connect with back-up routes, and b1 and b2 are able to connect using one back-up link and one sharing back-up link: 
+ ```bash
+ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.680 ms  0.811 ms  0.760 ms
+ 2  p3-link-4 (10.1.13.3)  1.406 ms  1.362 ms  1.316 ms
+ 3  * * *
+ 4  a2-link-7 (10.1.2.2)  2.196 ms  2.151 ms  2.083 ms
+ ```
+ ```bash
+ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  0.615 ms  0.578 ms  0.520 ms
+ 2  p3-link-5 (10.2.13.3)  1.086 ms  1.036 ms  1.008 ms
+ 3  * * *
+ 4  b2-link-6 (10.2.2.2)  2.066 ms  1.986 ms  1.901 ms
+ ```
+ ### Four outages, with sharing
+ ###### When there is sharing, even with four outages, we see that a1 and a2 are able to connect with back-up routes, and b1 and b2 are able to connect using sharing back-up routes:
+ ```bash
+ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-1 (10.1.1.1)  0.745 ms  0.735 ms  0.658 ms
+ 2  p3-link-4 (10.1.13.3)  1.064 ms  1.036 ms  0.965 ms
+ 3  * * *
+ 4  a2-link-7 (10.1.2.2)  1.772 ms  1.685 ms  1.593 ms
+ ```
+ ```bash
+ traceroute to b2 (10.2.2.2), 30 hops max, 60 byte packets  
+ 1  p1-link-2 (10.2.1.1)  0.778 ms  0.705 ms  0.630 ms
+ 2  p3-link-4 (10.1.13.3)  1.094 ms  1.054 ms  0.979 ms
+ 3  * * *
+ 4  b2-link-6 (10.2.2.2)  2.020 ms  1.974 ms  1.925 ms
+ ```
+ ---
+ ##Run my experiment
+ 
