@@ -178,3 +178,23 @@ traceroute to a2 (10.1.2.2), 30 hops max, 60 byte packets
 ![](https://witestlab.poly.edu/blog/content/images/2016/02/dd-jacks.png)
 ###### Bind to any InstaGENI site (click "Site 1" and choose an aggregate from the list) and reserve the resources.
 ###### When the resources are ready to login, log into each of p1, p2, and p3 and run the [routes-nosharing](https://github.com/devashryee/resilient-networks/blob/master/routes-nosharing.sh) script:
+```bash
+wget https://raw.githubusercontent.com/devashryee/resilient-networks/master/routes-nosharing.sh
+sudo su # become root to modify routes  
+bash routes-nosharing.sh
+```
+###### This sets up the routing table on each "gateway" node so that it will only forward traffic along links "belonging" to the same ISP to each others destination. To see the routing table, run
+```bash
+route -n
+```
+###### Now log onto the a1 and the b1 nodes. Make sure that they a1 is able to ping a2 and that b1 is able to ping b2.
+###### On node a1:
+```bash
+ping a2
+traceroute a2
+```
+###### On node b1:
+```bash
+ping b2
+traceroute b2
+```
