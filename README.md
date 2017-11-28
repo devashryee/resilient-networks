@@ -198,3 +198,72 @@ traceroute a2
 ping b2
 traceroute b2
 ```
+###### Record the routes that are reported for the "no failure" case.
+###### Now we're going to create our first outage by bringing a link down, (the link between p1 and p2 belonging to the "purple" ISP, ISP 2). To do so, start off by running the following command on the p1 and p2 nodes:
+```bash
+sudo ifconfig
+```
+###### On the p1 node, find out the name of the interface with IP address 10.2.12.1. On the p2 node, find out the name of the interface with IP address 10.2.12.2.
+###### Bring down those interfaces by running the following command on both p1 and p2 nodes:
+```bash
+sudo ifconfig eth# down
+```
+###### Run the same traceroute commands on a1 and b1 again and record the routes reported for the "one outage case."
+
+###### Now we're going to create two outages by bringing a second link down (the link between p1 and p2 belonging to the "green" ISP, ISP 1). You're going to do the same thing as before, except this time find the name of the interface with IP address 10.1.12.1 on p1 and the name of the interface with IP address 10.1.12.2 on p2.
+
+###### Bring both interfaces down once again by using the same command as before.
+
+###### Run the same traceroute commands on a1 and b1 again and record the routes reported for the "two outage" case.
+
+###### Now we're going to create three outages by bringing down a third link (the link between p2 and p3 belonging to the "purple" ISP, ISP 2). You're going to do the same thing as before, except this time find the name of the interface with IP address 10.2.23.2 on p2 and the name of the interface with IP address 10.2.23.3 on p3.
+
+###### Bring both interfaces down, run the traceroute commands on a1 and b1 again and record the routes reported for the "three outage" case.
+
+###### Now go back to GENI, find the slice you created for this experiment and hit "restart."
+###### When the resources are ready to login, log into each of p1, p2, and p3 and run the [routes-sharing](https://github.com/devashryee/resilient-networks/blob/master/routes-sharing.sh) script:
+```bash
+wget https://raw.githubusercontent.com/devashryee/resilient-networks/master/routes-sharing.sh
+sudo su # become root to modify routes  
+bash routes-sharing.sh
+```
+###### This sets up the routing table on each "gateway" node so that it will be able to forward both traffic along links "belonging" to the same ISP and forward traffic along links "belonging" to the other ISP to each others destination. To see the routing table, run
+```bash
+route -n
+```
+###### Now log onto a1 and b1, and make sure that a1 is able to ping a2 and that b1 is able to ping b2. If you forgot the command, run the following on a1 and b1, respectively:
+```bash
+ping a2
+```
+```bash
+ping b2
+```
+###### Now we're going to create our first outage by bringing a link down, (the link between p1 and p2 belonging to the "purple" ISP, ISP 2). If you forgot how to do so, start off by running the following command on the p1 and p2 nodes:
+```bash
+sudo ifconfig
+```
+###### On the p1 node, find out the name of the interface with IP address 10.2.12.1. On the p2 node, find out the name of the interface with IP address 10.2.12.2.
+
+###### Bring down those interfaces by running the following command on both p1 and p2 nodes:
+```bash
+sudo ifconfig eth# down
+```
+###### Run the traceroute command on a1 and b1 again and record the routes reported for the "one outage" case. If you don't remember from before, the traceroute command is as follows for nodes a1 and b1, respectively:
+```bash
+traceroute a2
+```
+```bash
+traceroute b2
+```
+###### Now we're going to create two outages by bringing a second link down (the link between p1 and p2 belonging to the "green" ISP, ISP 1). You're going to do the same thing as before, except this time find the name of the interface with IP address 10.1.12.1 on p1 and the name of the interface with IP address 10.1.12.2 on p2.
+###### Bring both interfaces down once again by using the same command as before.
+
+###### Run the traceroute commands on a1 and b1 again and record the routes reported for the "two outage" case.
+
+###### Now we're going to create three outages by bringing down a third link (the link between p2 and p3 belonging to the "purple" ISP, ISP 2). You're going to do the same thing as before, except this time find the name of the interface with IP address 10.2.23.2 on p2 and the name of the interface with IP address 10.2.23.3 on p3.
+
+###### Bring both interfaces down, run the traceroute commands on a1 and b1 again and record the routes reported for the "three outage" case.
+
+###### Lastly, we're going to create four outages by bringing down a fourth link (the link between p1 and p3 belonging to the "purple" ISP, ISP 2). This time find the name of the interface with IP address 10.2.13.1 on p1 and the name of the interface with IP address 10.2.13.3 on p3.
+
+###### Bring both interfaces down, run the traceroute commands on a1 and b1 again and record the routes reported for the "four outage" case.
