@@ -27,6 +27,7 @@ do
   fi
 done
  
+ 
 # This is how to get the list:
 for key in ${!arr[@]}
 do 
