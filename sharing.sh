@@ -1,0 +1,10 @@
+# Resources for experiment with sharing
+A1="pc8.utahddc.geniracks.net -p 37434"
+A2="pc9.utahddc.geniracks.net -p 37434"
+A3="pc2.utahddc.geniracks.net -p 37434"
+B1="pc3.utahddc.geniracks.net -p 37434"
+B2="pc5.utahddc.geniracks.net -p 37434"
+B3="pc4.utahddc.geniracks.net -p 37434"
+P1="pc10.utahddc.geniracks.net -p 37434"
+P2="pc11.utahddc.geniracks.net -p 37434"
+P3="pc6.utahddc.geniracks.net -p 37434"
