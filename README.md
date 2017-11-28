@@ -267,3 +267,6 @@ traceroute b2
 ###### Lastly, we're going to create four outages by bringing down a fourth link (the link between p1 and p3 belonging to the "purple" ISP, ISP 2). This time find the name of the interface with IP address 10.2.13.1 on p1 and the name of the interface with IP address 10.2.13.3 on p3.
 
 ###### Bring both interfaces down, run the traceroute commands on a1 and b1 again and record the routes reported for the "four outage" case.
+---
+## Notes
+###### This experiment was created in the summer of 2015 for my ARISE project. ARISE is organized by NYU Tandon School of Engineering's [Center for K12 Stem Education](http://engineering.nyu.edu/k12stem/) and supported by the Pinkerton Foundation and Driskill Foundation. Once again, a big thank you to Fraida for helping me create this experiment and write up this procedure.
