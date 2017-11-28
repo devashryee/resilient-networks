@@ -16,7 +16,8 @@ done
 # remove any that don't start with 10
 declare -A arr
 declare -A brr
- 
+
+
 for i in $(ifconfig | grep "eth" | awk '{print $1;}')
 do 
   IP=$(ifconfig $i | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*')
