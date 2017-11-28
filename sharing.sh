@@ -1,4 +1,3 @@
-# Resources for experiment with sharing
 A1="pc8.utahddc.geniracks.net -p 37434"
 A2="pc9.utahddc.geniracks.net -p 37434"
 A3="pc2.utahddc.geniracks.net -p 37434"
